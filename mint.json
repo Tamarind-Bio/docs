@@ -5,11 +5,11 @@
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#19758C",
+    "light": "#28a9c9",
+    "dark": "#165c6e",
     "anchors": {
       "from": "#0D9373",
       "to": "#07C983"
@@ -18,74 +18,52 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:info@tamarind.bio"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://app.tamarind.bio"
   },
   "tabs": [
     {
       "name": "API Reference",
-      "url": "api-reference"
+      "url": "api-docs"
     }
   ],
   "anchors": [
     {
-      "name": "Documentation",
+      "name": "API Docs",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "url": "https://app.tamarind.bio/api-docs"
     }
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Tasks",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
+        "tasks/structure-prediction",
+        "tasks/binder-design",
+        "tasks/property-prediction"
       ]
-    },
+    }, 
     {
-      "group": "Essentials",
+      "group": "Tools",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "tools/rfdiffusion",
+        "tools/rfantibody",
+        "tools/igdesign",
+        "tools/antifold",
+        "tools/thermompnn",
+        "tools/all-atom-design",
+        "tools/antibody-evolution",
+        "tools/immunebuilder",
+        "tools/placer",
+        "tools/tap"
       ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://linkedin.com/company/mintlify"
+    "linkedin": "https://www.linkedin.com/company/tamarind-bio"
   }
 }
