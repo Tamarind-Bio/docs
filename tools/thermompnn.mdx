@@ -1,3 +1,8 @@
+---
+title: ThermoMPNN
+description: 'Point mutations to improve stability'
+---
+
 ThermoMPNN returns point mutations scored by their respective impacts on thermostability. The method shows state-of-the-art performance on established benchmarks. It is a variant of ProteinMPNN, a machine learning method that generates novel sequences given a structure for it to fold into. ThermoMPNN, specifically, is trained on a specialized dataset to predict stability changes upon a given mutation, while utilizing ProteinMPNN's learned knowledge about sequence-structure relationships.
 
 Notably, ThermoMPNN can very quickly (within seconds to minutes) evaluate all possible point mutations of a given input, while showing more accuracy compared to more computationally intensive approaches like MD and MM.

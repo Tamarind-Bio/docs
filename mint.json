@@ -43,8 +43,10 @@
       "group": "Tasks",
       "pages": [
         "tasks/structure-prediction",
-        "tasks/binder-design",
-        "tasks/property-prediction"
+        "tasks/protein-design",
+        "tasks/property-prediction",
+        "tasks/finetuning",
+        "tasks/docking"
       ]
     }, 
     {
@@ -55,11 +57,21 @@
         "tools/igdesign",
         "tools/antifold",
         "tools/thermompnn",
+        "tools/proteinmpnn",
         "tools/all-atom-design",
         "tools/antibody-evolution",
         "tools/immunebuilder",
         "tools/placer",
         "tools/tap"
+      ]
+    },
+    {
+      "group": "Platform",
+      "pages": [
+        "tamarind/batch",
+        "tamarind/pipelines",
+        "tamarind/api",
+        "tamarind/scoring"
       ]
     }
   ],

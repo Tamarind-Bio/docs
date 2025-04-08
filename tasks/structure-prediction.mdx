@@ -2,3 +2,73 @@
 title: 'Structure Prediction'
 description: 'Start building awesome documentation in under 5 minutes'
 ---
+
+The structure prediction task is simple: given an amino acid sequence, predict its 3D structure. The input is a set of protein sequences, the output is a collection of PDB or CIF files. You can think of structure prediction like a translation from sequence to structure. It will be interwoven throughout your workflow, from target preparation to binder design to assessing developability. 
+
+An overview of our top recommendations for structure prediction tools is below. 
+
+| Tool | Inputs | Outputs | Capabilities |
+|------|---------|----------|--------------|
+| AlphaFold | Protein | Average pLDDT, PAE matrix, ipTM/pTM | 5 samples |
+| Boltz | Protein, nucleic acid, small molecule (ccd, smiles) | Confidence, PDE/PAE matrix, ipTM/pTM | Multiple samples |
+| Chai | Protein, nucleic acid, small molecule (smiles) | Aggregate score, Average pLDDT, PAE/PDE matrix, pTM/ipTM | Multiple samples |
+| Protenix | Protein, nucleic acid, small molecule (ccd) | pLDDT, pTM/ipTM, PAE/PDE matrix | Multiple samples |
+| ESMFold | Protein | Pdb only | 1 sample |
+| Fast | | | |
+
+### Recommend for special cases
+- **ImmuneBuilder** - for fast antibody/nanobody/tcr
+- **HighFold** - for cyclic peptides
+
+### More experimental, proceed with caution
+- **AFSample2** - uses AlphaFold jackhammer MSAs instead of MMseqs2 MSAs, so takes several hours. Generates arbitrary number of conformations
+- **UniFold** - retrainable AlphaFold, also uses jackhammer MSAs
+- **CombFold** - combine large complexes with many, repeating domains from subunit structure predictions with 1-3 chains
+- **AlphaFlow** - generates more diverse conformations
+- **RosettaFoldNA** - Protein/nucleic acid complexes
+- **RosettaFold-All-Atom** - Protein/small molecule complexes - allows for uploading a sdf for ligand
+
+## Multiple Sequence Alignment
+
+All of our structure prediction tools require a Multiple Sequence Alignment (MSA) as input. This queries a large database of sequences to find similar sequences to your input to inform the structure prediction. The alignment produces a .a3m file, which includes the result sequences aligned with the input sequence. We then feed this file into the structure prediction methods. 
+
+We use the ColabFold MMseqs2 method to query uniref30. We host our own servers for MSA, with the databases loaded into memory, for a great improvement in calculation speed. To sample alternate conformations of your structure, it may be helpful to try adjusting the MSA depth setting to be shallower. 
+
+## Prediction speed
+You can expect most AlphaFold3 structure prediction jobs to complete within ~10 minutes on Tamarind. AlphaFold2 is an order of magnitude slower, taking ~30 minutes to several hours for larger jobs. Prediction time increases linearly with the number of recycles (AlphaFold2) or samples (AlphaFold3) selected. 
+
+## Input limits
+All Alphafold3 models have a hard input limit of 2048 residues due to limitations of the models. Alphafold2 has a limit of ~4000 residues due to compute restraints. 
+
+## Alphafold2
+AlphaFold2 was a major leap in structure prediction when it came out, shifting the field from physics-based modeling to deep learning. Instead of simulating folding, it used attention-based neural networks and evolutionary data to predict structures directly from sequence, reaching near-experimental accuracy and outperforming everything that came before it.
+
+The training cutoff for AlphaFold2 is April 30, 2018. This can be helpful to keep in mind when evaluating or benchmarking results. 
+
+### Overview of outputs
+- **pTM** (predicted Template Modeling score): Evaluates the confidence in the overall arrangement of the predicted structure, ranging from 0 to 1. Scores above 0.5 suggest a good prediction; scores below 0.5 indicate poor confidence
+- **ipTM** (interface predicted TM-score): Assesses the confidence in the predicted relative positions of interacting subunits within a protein complex. Values above 0.8 indicate high-quality interface predictions, while scores below 0.6 suggest potential inaccuracies. ​
+- **pAE** (predicted Aligned Error) matrix: A 2D plot estimating the expected positional error between residue pairs in Ångströms. Lower pAE values denote higher confidence in the relative positioning of residues, whereas higher values indicate uncertainty. This matrix is particularly useful for evaluating the confidence in spatial relationships between different domains or subunits. 
+
+More information on interpreting outputs: [https://www.ebi.ac.uk/training/online/courses/alphafold/](https://www.ebi.ac.uk/training/online/courses/alphafold/)
+
+AlphaFold2 has 5 sets of weights, and the best model is listed as Rank 1. Because of this, AlphaFold2 can only produce up to 5 models. By default, AlphaFold2 will run for 3 recycles. You can increase this up to 20, but by default the model will still stop earlier if there's a small threshold between subsequent recycles. You can override this by turning on the "No Stop" parameter. 
+
+We offer ColabFold's default amber setting for relaxation. For further energy minimization, we recommend our OpenMM molecular dynamics tool. 
+
+## Alphafold3
+While Alphafold3 is not commercially available, various reproductions of it have come out, which match its accuracy. We offer Chai-1, Boltz, and Protenix. These models are all-atom models, meaning they can incorporate small molecules and nucleic acids into the structure as well. 
+
+Alphafold3 models are all generative models, so they can sample an unlimited number of output structures (up to thousands). If you are looking for a particular pose, we recommend generating many samples and taking the highest confidence / clustering afterwards. 
+
+We are members of the OpenFold consortium, which is working on OpenFold, a more faithful AlphaFold3 reproduction. We'll have it available when it's released in the coming weeks!
+
+## Antibody structure prediction
+Chai and Boltz both provide the option to specify restraints between epitope residues and antibody residues. We've found using either with a large number of samples to produce good results.  
+
+If you need a lot of structure predictions of just the antibody/nanobody fast, ImmuneBuilder or ABodyBuilder3 may be useful. They take seconds per run, and produce reasonable structures, though aren't able to include the target in the prediction. 
+
+We offer TCRModel2 for Class1, Class2, and unbound TCR prediction. 
+
+## Peptide structure prediction
+For cyclic peptides, we recommend Highfold, which is a modified version of ColabFold with a cyclic offset implemented, meaning it accounts for the circular rather than linear nature of the peptide.

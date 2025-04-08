@@ -1,4 +1,31 @@
 ---
 title: 'Property Prediction'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Recommended tools to predict properties from structure and sequence'
 ---
+
+## Antibody Developability Properties ##
+Developability properties are crucial for assessing the potential of therapeutic proteins, particularly antibodies, for clinical development:
+
+### Therapeutic Antibody Profiling ###
+**Therapeutic Antibody Profiler (TAP)**: This tool, developed by the Deane lab, compares structural metrics of an antibody to known therapeutic antibodies. While the tool itself does not have code available, we've reproduced its methodology in our tool.
+
+### Immunogenicity ###
+We offer DeepImmuno for Class I Immunogenicity and TLimmuno for Class II Immunogenicity. These tools take every possible n-mer peptide in your protein and assess its response with every HLA allele. You'll be able to see the maximum and average score for each peptide, as well as the allele where it achieved its maximum.
+
+## Characterization ##
+
+### Solubility ###
+Poor solubility can lead to aggregation, reduced bioavailability, and manufacturing challenges. We recommend using NetSolP for fast, sequence-based solubility prediction—it's well-suited for screening designs early in the process. That said, solubility should usually be optimized after primary metrics like binding affinity or selectivity, since improving solubility may require surface mutations that can disrupt function. If you already have experimental solubility data, our ESM finetuning tool can be trained on it to learn what features drive solubility in your specific context, enabling more tailored predictions.
+
+### Stability ###
+Stability is critical for ensuring that proteins remain folded and functional under physiological and storage conditions. ThermoMPNN has been found to find stabilizing point mutations. DeepStabP predicts melting point.
+
+### Aggregation ###
+Aggregation can lead to loss of activity, reduced solubility, and increased immunogenicity. AggreScan is a useful tool for identifying aggregation-prone regions within a sequence, helping guide design decisions such as introducing solubilizing mutations or avoiding exposed hydrophobic patches.
+
+### Post-Translational Modifications (PTMs) ###
+We offer a sequence analysis tool for antibodies to identify PTMs from key patterns in the protein sequence.
+
+### Enzyme Activity ###
+We offer DLKcat and CatPred to predict activity of a protein given a protein sequence and smiles substrate. You can also try one of our protein/small molecule docking tools to use binding affinity as a proxy for activity.
+

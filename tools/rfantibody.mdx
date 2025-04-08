@@ -2,29 +2,27 @@ RFantibody, by authors from the IPD's Baker Lab propose a pipeline to computatio
 
 The authors show a validated, influenza-targeting VHH, along with scFvs (for both light and heavy chains) to TcdB and a Phox2b peptide-MHC complex. With this, de novo design of antibodies targeting specific epitopes becomes possible, albeit with some needed affinity optimization after the initial round of generated binders. 
 
-Practical Considerations
+### Practical Considerations ###
 
 On Tamarind, we allow the entire pipeline to be run with our RFantibody tool, you just need a target and an epitope, and Tamarind will generate and rank thousands of designs for you.
 
-Scale
+### Scale ###
 
 The smallest number of designs the authors find hits for is a set of 95 VHHs. They also note that a more realistic number of designs to test may be in the 10k range. This is primarily because RF2 is not a very strong filter for non-binders and binders, and finding a stricter filter remains a challenge. For the time being, yeast display or other high throughput screening methods seem to be the most reliable path to identifying de novo binders. 
 
-Target Site and Hotspot Selection
+### Target Site and Hotspot Selection ###
 
 A site candidate for binding should have at least 3 hydrophobic residues, as binding to polar sites and those with nearby glycans remain a challenge. See here for strategies on how to generate binders to unstructured peptides, which should be applicable to unstructured loops as well.
 
 RFantibody is highly sensitive to specified epitope/hotspots, as it generating both the binder and the docked pose. As most with de novo design tools, we recommend trying a smaller number of designs to see if the generated poses match your expectations. Once you have set of settings you are happy with Tamarind can support tens of thousands of in silico designs.
 
-Filtering Methods
+### Filtering Methods ###
 
-From the authors directly:
-
-We recommend the following minimal filtering criteria: RF2 pAE < 10 RMSD (design versus RF2 predicted) < 2Å
+The authors recommend filtering by: RF2 pAE < 10 and RMSD (design vs. RF2 predicted) < 2Å
 
 These serve as minimums and there isn't a strong guarantee that sequences conforming to the standards are binders The most significant bottleneck to this pipeline being adopted is the quality of the filtration step.
 
-Methods
+### Methods ###
 
 The RFantibody pipeline comprises of three steps: structure generation with fine-tuned RFdiffusion, design of CDR sequences with ProteinMPNN and using fine-tuned RoseTTAFold2 for design validation. 
 
