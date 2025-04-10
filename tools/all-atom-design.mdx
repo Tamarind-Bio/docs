@@ -1,4 +1,31 @@
 ---
 title: RFdiffusion All Atom
-description: 'Welcome to the home of your new documentation'
+description: 'Design proteins to bind to small molecule'
 ---
+
+RFdiffusion All-Atom designs proteins that bind to small molecules and other non-protein molecules. Built by fine-tuning RoseTTAFold All-Atom (RFAA) on diffusive denoising tasks, it can generate binding pockets by constructing protein structures around target molecules.
+
+## Experimental Validation
+
+The tool has been experimentally validated across three diverse small molecules:
+
+### Digoxigenin Binders
+RFdiffusion All-Atom successfully designed digoxigenin-binding proteins without any prior assumptions about the protein-ligand interface. From 4,416 designs screened in yeast, several binders were identified with Kd values as low as 10 nM. The most stable designs remained functional at temperatures up to 95°C, demonstrating remarkable thermostability.
+
+### Heme Binders
+For heme-binding proteins, the tool was used to design structures with specific focus on catalytic function. From 168 initial designs, 135 expressed well in E. coli, with 96 showing correct heme binding spectra. 38 designs were confirmed to be monomeric and retained heme binding, with most remaining stable above 85°C.
+
+### Bilin Binders
+Using the CARD motif for covalent attachment, RFdiffusion All-Atom generated 94 designs with 9 showing successful binding (9.6% hit rate). The designs achieved diverse structures different from natural phycobiliproteins, with varying spectral properties including absorption maxima ranging from 557-607 nm and fluorescence quantum yields up to 57% of native protein. These results significantly outperformed previous expert-designed scaffolds.
+
+### Inputs
+- **PDB File**: Structure file containing both protein and ligand in PDB format
+- **Contigs**: String describing fixed and variable regions of protein (see https://www.tamarind.bio/all-atom-design for format)
+- **Ligand Code**: Code of the ligand to design around (must match a ligand in your PDB file)
+- **Number of Designs**: Number of designs to generate (1-16, default: 1)
+
+### Outputs
+- **Designed Structures**: PDB files of the designed protein-ligand complexes
+- **Design Scores**: Quality metrics for each design
+
+If you don't have a protein-ligand complex structure, you can first predict a docked structure using one of our structure prediction tools. If you have binding site information, you can incorporate restraints into your prediction.
