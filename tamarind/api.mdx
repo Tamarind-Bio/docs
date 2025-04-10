@@ -1,0 +1,21 @@
+---
+title: API
+description: 'Access our tools programatically'
+---
+
+We make all of our tools accessible via our REST API. Here are the available endpoints:
+
+* **/submit-job** (POST) - Submit individual jobs
+* **/submit-batch** (POST) - Submit batch jobs by specifying the settings of each subjob
+* **/jobs** (GET) - Retrieve jobs
+* **/results** (POST) - Retrieve results
+* **/upload** (PUT) - Upload files to use in jobs
+* **/files** (GET) - Retrieve uploaded input files
+
+Each tool has required settings checked by default, and you can select additional settings to interactively construct your parameters. An example for AlphaFold is shown below. 
+
+Some tools also have tasks, which allow for different combinations of settings to use the same tool. One common example is a different task for antibody inputs vs. nanobody inputs, such as in immunebuilder. 
+
+![Immunebuilder API Docs](/tamarind/images/api-immunebuilder.png)
+
+[View Full API docs here](https://app.tamarind.bio/api-docs)

@@ -1,0 +1,19 @@
+---
+title: 'Docking'
+description: 'Recommended tools for docking'
+---
+
+## Protein-Protein Docking
+
+We haven't found a great protein-protein docking tool, though we do offer ColabDock, which provides the option for restraints. 
+
+We've found that structure prediction using one of our Alphafold3 reproductions is often more useful for finding a suitable pose. For Chai1, you can incorporate templates for a more accurate prediction of your antigen structure. We support both finding templates from the pdb100 or uploading your own custom cif files. 
+
+## Protein-Small Molecule Docking
+
+If you need fast docking, we recommend physics based approaches like AutoDock/Smina/Gnina. Gnina has a deep learning based scoring function which can be useful for rescoring poses. The output binding affinity from these tools is meant to be an approximation of the binding free energy (ΔG) between the ligand and the receptor, typically reported in kcal/mol. More negative values suggest stronger predicted binding. 
+
+These scores should be interpreted with caution—they are relative, not absolute, and best used to compare compounds within the same system. For example, a compound scoring -9.0 kcal/mol is predicted to bind more tightly than one scoring -6.0 kcal/mol, but these numbers don't directly translate to experimental affinities. It's also important to visually inspect docking poses for meaningful interactions (e.g., hydrogen bonds, hydrophobic contacts) and ensure the ligand is placed in a reasonable conformation. Re-scoring top poses with more advanced methods, like MM-GBSA or using Gnina's CNN scoring, can help improve confidence in predictions.
+
+To generate many conformations of an existing protein-ligand pose, we recommend PLACER.
+

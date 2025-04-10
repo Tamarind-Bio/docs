@@ -1,0 +1,22 @@
+---
+title: Pipelines
+description: 'Automatically connect outputs to inputs'
+---
+
+Our pipelines tool allows you automatically connect outputs from one tool to inputs of another tool. 
+
+Pipelines are made up of stages, based on each stage's input and output type:
+- Structure design - pdb -> pdb
+- Inverse folding - pdb -> sequence
+- Mutate sequences - sequence -> sequence
+- Structure prediction - sequence -> pdb
+
+Each stage can have any number of tools which share the same input and output type. Each stage can also have any number of scoring tools to validate the generated designs for various properties. 
+
+For each tool, you will see "Piped from previous stage input" for the setting that is being automatically passed from the previous stage or input files. Fill in other settings as you desire. 
+
+![Pipelines stage example](/tamarind/images/pipelines-stage.png)
+
+We recommend selecting "Pause for manual filtering after this stage" during testing, to validate the results of each stage of your pipeline are what you expect. We also recommend starting with a small number of inputs/designs to test your pipeline out. 
+
+You can also save your pipeline as a draft for the future, and view pipelines created by other members of your organization. 
