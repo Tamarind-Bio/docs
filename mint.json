@@ -54,6 +54,7 @@
       "pages": [
         "tools/rfdiffusion",
         "tools/rfantibody",
+        "tools/bindcraft",
         "tools/igdesign",
         "tools/antifold",
         "tools/thermompnn",

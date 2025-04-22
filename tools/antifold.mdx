@@ -3,4 +3,21 @@ title: AntiFold
 description: 'Structure based antibody design'
 ---
 
-AntiFold is an antibody-specific inverse folding model fine-tuned from ESM-IF1 that enables structure-based antibody design and optimization. It excels in sequence recovery across complementarity-determining regions and demonstrates superior performance in predicting antibody-antigen binding affinity.
+### Antibody sequence design
+
+AntiFold is an antibody-specific model developed by OPIG which generates diverse sequences which fold into a structure. It's fine-tuned from ESM-IF1 and allows for structure-based antibody design and optimization, with the antigen in context. It excels in sequence recovery across CDRs and demonstrates superior performance to previous methods in predicting antibody-antigen binding affinity, including ProteinMPNN and AbMPNN.
+
+AntiFold on Tamarind has been modified to support sampling sequences from nanobody inputs and specifying custom CDR indices (IMGT numbered CDRs are used by default). 
+
+### Inputs
+- PDB File
+- Heavy Chain ID
+- Light Chain ID
+- Whether you'd like to include the antigen in context
+- Regions to mutate (ex. CDR1, CDRH1, FW1)
+
+### Outputs
+- Fasta file with generated sequences
+- CSV with log probabilities for each residue at each position (less negative means more likely mutation)
+
+[Try AntiFold](https://app.tamarind.bio/tools/antifold)

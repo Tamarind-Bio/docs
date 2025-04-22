@@ -1,11 +1,21 @@
-# Point Mutations
+We are actively developing our finetuning pipelines. Please email info@tamarind.bio if any of the below use cases sound interesting to you, and we can work with you to determine the best approach given your available data. 
 
-It's difficult for current state of the art models to capture differences in point mutations. We recommend ALDE if you have some point mutations and want to find what others to test.
+### Language model for property prediction
+  
+We offer protein language model finetuning using ESM2 for both regression and classification. Simply upload a CSV containing a column for your protein sequences and a column for your property of interest, and we'll create a custom model. This model will then appear in your [My Models](https://app.tamarind.bio/app/models) tab, and you can use it for inference with your new protein sequences. 
 
-## Small Datasets
+### Antibody property prediction
 
-For antibody datasets with a heavy and light chain, we offer an Antibody finetuning tool, which uses embeddings from Antiberty for regression and classification. Simply select the columns for your sequence, property, and job name, and we'll create a custom model for your use case. You can then find this model in the "My Models" tab on the main page, and use it for inference on another dataset.
+For antibody datasets with a heavy and light chain, we offer an Antibody finetuning tool, originally trained on specificity data, which uses embeddings from Antiberty for regression and classification. Select the columns for your sequence, property, and job name, and we'll create a custom model for your use case. 
+  
+### Point mutations
+  
+It's difficult for current state of the art models to capture differences in point mutations. We recommend ALDE if you have some point mutations and want to find what others to test. 
 
-## Large Datasets (30,000+ data points)
+### Structure Prediction
 
-Reach out to us to use AlphaBind, currently on a per request basis.
+We offer a tool to finetune Boltz on your own custom cifs and use it for inference. 
+
+### Large Binding Affinity Datasets (30,000+ data points) 
+
+We recommend AlphaBind if you have large data sets of binding affinity data - reach out to learn more. 

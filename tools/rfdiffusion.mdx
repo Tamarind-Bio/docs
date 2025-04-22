@@ -3,60 +3,64 @@ title: RFdiffusion
 description: 'General purpose protein design'
 ---
 
+We offer 4 defined tasks to use RFdiffusion: Binder Design, Binder Redesign, Motif Scaffolding, and Partial Diffusion. If you know what you're doing, you can also specify custom contigs using the format specified by [RFdiffusion](https://github.com/RosettaCommons/RFdiffusion)
+
 ## Binder Design
 
-RFdiffusion can be used to design protein binders that target specific protein surfaces. This task involves generating novel protein sequences that can bind to a target protein of interest. The process leverages diffusion models to sample from the space of possible protein structures and sequences.
+Generate a completely novel binder to a target protein structure, at certain residues known as a "hotspot".
 
 ### Required Parameters
-- **PDB File** (`pdbFile`): Input PDB file containing the target structure
-- **Target Chains** (`targetChains`): Chain IDs of the target protein (e.g., ["A"])
-- **Binder Length** (`binderLength`): Length of the binder region to be designed. Can be a fixed length (e.g., "20") or a range to sample uniformly (e.g., "20-30")
+- **PDB File** (\`pdbFile\`): Input PDB file containing the target structure
+- **Target Chains** (\`targetChains\`): Chain IDs of the target protein (e.g., ["A"])
+- **Binder Length** (\`binderLength\`): Length of the binder region to be designed. Can be a fixed length (e.g., "20") or a range to sample uniformly (e.g., "20-30")
 
 ### Optional Parameters
-- **Hotspots** (`binderHotspots`): Specific residues on the target to focus on when designing the binder
-- **Number of Designs** (`numDesigns`): Number of designs to generate (default: 1)
-- **Verify** (`verify`): Whether to verify designs with MPNN and AlphaFold (default: true)
+- **Hotspots** (\`binderHotspots\`): Specific residues on the target to focus on when designing the binder
+- **Number of Designs** (\`numDesigns\`): Number of designs to generate (default: 1)
+- **Verify** (\`verify\`): Whether to verify designs with MPNN and AlphaFold (default: true)
 
 ## Binder Redesign
 
-The binder redesign task allows you to modify existing protein binders to improve their binding properties or alter their specificity. This can be useful for optimizing existing protein-protein interactions or adapting binders to new targets.
+Modify parts of an existing protein binder to improve its binding properties or alter ots specificity. This can be useful for optimizing existing protein-protein interactions or adapting binders to new targets.
 
 ### Required Parameters
-- **PDB File** (`pdbFile`): Input PDB file containing the binder/target complex
-- **Binder Chain** (`binderChain`): Chain ID of the binder chain to be redesigned
-- **Designed Residues** (`designedResidues`): Residues to be redesigned in the binder chain (format: ranges like "1-5, 7-10")
-- **Designed Lengths** (`designedLengths`): Length specifications for each designed region, with lower and upper bounds for sampling
+- **PDB File** (\`pdbFile\`): Input PDB file containing the binder/target complex
+- **Binder Chain** (\`binderChain\`): Chain ID of the binder chain to be redesigned
+- **Designed Residues** (\`designedResidues\`): Residues to be redesigned in the binder chain (format: ranges like "1-5, 7-10")
+- **Designed Lengths** (\`designedLengths\`): Length specifications for each designed region, with lower and upper bounds for sampling
 
 ### Optional Parameters
-- **Hotspot Chain** (`hotspotChain`): Chain to select residues to focus on
-- **Hotspots** (`hotspots`): Specific residues to focus on during redesign
-- **Number of Designs** (`numDesigns`): Number of designs to generate (default: 1)
-- **Verify** (`verify`): Whether to verify designs with MPNN and AlphaFold (default: true)
+- **Hotspot Chain** (\`hotspotChain\`): Chain to select residues to focus on
+- **Hotspots** (\`hotspots\`): Specific residues to focus on during redesign
+- **Number of Designs** (\`numDesigns\`): Number of designs to generate (default: 1)
+- **Verify** (\`verify\`): Whether to verify designs with MPNN and AlphaFold (default: true)
 
 ## Motif Scaffolding
 
-Motif scaffolding is a powerful application that enables the design of protein structures around specific functional motifs. This task allows you to preserve important structural or functional elements while generating novel surrounding protein architecture.
-
+Scaffold existing interface with newly designed regions. This task allows you to preserve important structural or functional elements while generating novel surrounding protein architecture.
+  
 ### Required Parameters
-- **PDB File** (`pdbFile`): Input PDB file containing the structure
-- **Interface Chain** (`interfaceChain`): Chain ID of the chain with interface to be scaffolded
-- **Interface Residues** (`interfaceResidues`): Residues to be scaffolded (format: ranges like "10-20,30-40")
-- **Designed Lengths** (`designedLengths`): Length specifications for each designed region
+- **PDB File** (\`pdbFile\`): Input PDB file containing the structure
+- **Interface Chain** (\`interfaceChain\`): Chain ID of the chain with interface to be scaffolded
+- **Interface Residues** (\`interfaceResidues\`): Residues to be scaffolded (format: ranges like "10-20,30-40")
+- **Designed Lengths** (\`designedLengths\`): Length specifications for each designed region
 
 ### Optional Parameters
-- **Number of Designs** (`numDesigns`): Number of designs to generate (default: 1)
-- **Verify** (`verify`): Whether to verify designs with MPNN and AlphaFold (default: true)
+- **Number of Designs** (\`numDesigns\`): Number of designs to generate (default: 1)
+- **Verify** (\`verify\`): Whether to verify designs with MPNN and AlphaFold (default: true)
 
 ## Partial Diffusion
 
-Partial diffusion is a specialized task that allows you to perform diffusion-based design on specific regions of a protein while keeping other parts fixed. This is particularly useful when you want to maintain certain structural elements while redesigning others.
+Partial diffusion allows you to diversify specific regions of a protein while keeping other parts fixed. This will take into account the initial structure at redesigned residues (as compared to Motif Scaffolding, which will ignore the original residues)
 
 ### Required Parameters
-- **PDB File** (`pdbFile`): Input PDB file containing the structure
-- **Designed Chain** (`designedChain`): Chain ID of the chain to be designed
-- **Diffused Residues** (`diffusedResidues`): Residues to be diffused (format: ranges like "1-5, 7-10")
+- **PDB File** (\`pdbFile\`): Input PDB file containing the structure
+- **Designed Chain** (\`designedChain\`): Chain ID of the chain to be designed
+- **Diffused Residues** (\`diffusedResidues\`): Residues to be diffused (format: ranges like "1-5, 7-10")
 
 ### Optional Parameters
-- **Partial Diffusion Temperature** (`partial_T`): Temperature parameter for the diffusion process
-- **Number of Designs** (`numDesigns`): Number of designs to generate (default: 1)
-- **Verify** (`verify`): Whether to verify designs with MPNN and AlphaFold (default: true)
+- **Partial Diffusion Temperature** (\`partial_T\`): Temperature parameter for the diffusion process
+- **Number of Designs** (\`numDesigns\`): Number of designs to generate (default: 1)
+- **Verify** (\`verify\`): Whether to verify designs with MPNN and AlphaFold (default: true)
+
+[Try RFdiffusion](https://app.tamarind.bio/tools/rfdiffusion)

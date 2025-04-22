@@ -1,31 +1,26 @@
 ---
 title: 'Property Prediction'
-description: 'Recommended tools to predict properties from structure and sequence'
+description: 'Predict properties from structure and sequence'
 ---
 
-## Antibody Developability Properties ##
-Developability properties are crucial for assessing the potential of therapeutic proteins, particularly antibodies, for clinical development:
+## Antibody Developability Properties
+  
+### General Developability
+**[Therapeutic Antibody Profiler (TAP)](https://app.tamarind.bio/tools/tap)**: TAP compares structural metrics of an antibody to known therapeutic antibodies. While the tool itself does not have code available, we've reproduced its methodology in our tool to calculate Patches of Surface Hydrophobicity (PSH), Patches of positive charge (PPC), Patches of negative charge (PNC), Structural Fv charge symmetry, and CDR length. We'll flag any antibodies outside the typical range for therapeutic antibodies.
 
-### Therapeutic Antibody Profiling ###
-**Therapeutic Antibody Profiler (TAP)**: This tool, developed by the Deane lab, compares structural metrics of an antibody to known therapeutic antibodies. While the tool itself does not have code available, we've reproduced its methodology in our tool.
+### Immunogenicity
+We offer [DeepImmuno](https://app.tamarind.bio/tools/deepimmuno) for Class I Immunogenicity and [TLimmuno](https://app.tamarind.bio/tools/tlimmuno) for Class II Immunogenicity. These tools take every possible n-mer peptide in your protein and assess its response with every HLA allele. You'll be able to see the maximum and average score for each peptide, as well as the allele where it achieved its maximum.
 
-### Immunogenicity ###
-We offer DeepImmuno for Class I Immunogenicity and TLimmuno for Class II Immunogenicity. These tools take every possible n-mer peptide in your protein and assess its response with every HLA allele. You'll be able to see the maximum and average score for each peptide, as well as the allele where it achieved its maximum.
+## Characterization
 
-## Characterization ##
+### Solubility
+We recommend using [NetSolP](https://app.tamarind.bio/tools/netsolp) for fast, sequence-based solubility prediction. That said, solubility should usually be optimized after primary metrics like binding affinity or selectivity. If you already have experimental solubility data, our ESM finetuning tool can be trained on it to learn what features drive solubility in your specific context, enabling more tailored predictions.
 
-### Solubility ###
-Poor solubility can lead to aggregation, reduced bioavailability, and manufacturing challenges. We recommend using NetSolP for fast, sequence-based solubility prediction—it's well-suited for screening designs early in the process. That said, solubility should usually be optimized after primary metrics like binding affinity or selectivity, since improving solubility may require surface mutations that can disrupt function. If you already have experimental solubility data, our ESM finetuning tool can be trained on it to learn what features drive solubility in your specific context, enabling more tailored predictions.
+### Stability
+[ThermoMPNN](https://app.tamarind.bio/tools/thermompnn) has been found to find stabilizing point mutations. DeepStabP predicts melting point.
 
-### Stability ###
-Stability is critical for ensuring that proteins remain folded and functional under physiological and storage conditions. ThermoMPNN has been found to find stabilizing point mutations. DeepStabP predicts melting point.
+### Aggregation
+[AggreScan3D](https://app.tamarind.bio/tools/aggrescan3d) is a useful tool for identifying aggregation-prone regions within a sequence, helping guide design decisions such as introducing solubilizing mutations or avoiding exposed hydrophobic patches.
 
-### Aggregation ###
-Aggregation can lead to loss of activity, reduced solubility, and increased immunogenicity. AggreScan is a useful tool for identifying aggregation-prone regions within a sequence, helping guide design decisions such as introducing solubilizing mutations or avoiding exposed hydrophobic patches.
-
-### Post-Translational Modifications (PTMs) ###
-We offer a sequence analysis tool for antibodies to identify PTMs from key patterns in the protein sequence.
-
-### Enzyme Activity ###
-We offer DLKcat and CatPred to predict activity of a protein given a protein sequence and smiles substrate. You can also try one of our protein/small molecule docking tools to use binding affinity as a proxy for activity.
-
+### Enzyme Activity
+We offer [DLKcat](https://app.tamarind.bio/tools/dlkcat) and [CatPred](https://app.tamarind.bio/tools/catpred) to predict activity of a protein given a protein sequence and smiles substrate. You can also try one of our protein/small molecule docking tools to use binding affinity as a proxy for activity.

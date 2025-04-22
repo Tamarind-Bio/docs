@@ -1,0 +1,43 @@
+---
+title: Bindcraft
+description: 'Protein design with filters'
+---
+
+### Generate De Novo Binders
+
+De novo binder design using AlphaFold2 to generate binders with 10-100% experimental success rate for challenging targets such as cellular receptors, allergens, de novo designed proteins, and CRISPR-Cas9.
+  
+### Experimental Validation
+
+BindCraft was tested on 12 diverse, challenging, and therapeutically relevant targets. 
+
+| Antigen | Type | Lowest Measured Kd | Experimentally Confirmed Binders / Tested Designs |
+|----------|----------|----------------------|----------------------|
+| PD1 | Cellular Receptor | &lt;1 nM* | 13 / 53 (24.5%) |
+| PD-L1 | Cellular Receptor | 615 nM* | 7 / 9 (77.8%) |
+| CD45 | Cellular Receptor | 15 nM | 4 / 16 (25%) |
+| CLDN1 | Cellular Receptor | &lt;200 nM | 6 / 7 (85.7%) |
+| IFNAR2 | Cellular Receptor | 260 nM | 3 / 9 (33.3%) |
+| DerF7 | Common Allergen | 13 nM | 4 / 10 (40%) |
+| DerF21 | Common Allergen | 793 nM* | 4 / 7 (57.1%) |
+| BetV1 | Common Allergen | 120 nM | 2 / 7 (28.6%) |
+| SpCas9 | Multi-domain Nuclease | 267 nM | 6 / 6 (100%) |
+| CbAgo | Multi-domain Nuclease | 5 nM | 2 / 12 (16.7%) |
+| BBF-14 | De novo | 21 nM | 6 / 11 (54.5%) |
+| Sas6 | Structural | 5.7 µM | 3 / 9 (33.3%) |
+
+* = estimated Kd due to poor fit
+
+### Troubleshooting no successful designs
+
+BindCraft works by filtering out designs as it generates them against a series of metrics including pLDDT, pTM, ipTM, and iPAE, to ensure high quality final designs. However, this means that it can take many hours to find any binders which pass all the filters, and some targets never find a suitable binder. By default, we run all BindCraft jobs for 8 hours before stopping them, but you can adjust this up to 48 hours. 
+
+BindCraft is sensitive to initial hotspots. If your job fails to find any successful designs, please try changing the hotspot area. If your designs still fail, you can try using the "relaxed" filters or setting custom values for certain filters. 
+
+Target structures are limited to ~600 residues due to compute constraints. Please trim your target protein down to this length. 
+
+### Rosetta Scoring
+
+BindCraft relies on Rosetta for scoring and some utilities. We've created a version of BindCraft without Rosetta, and offer that by default. If you have a Rosetta license, please let us know and we'll work with you to enable Rosetta-based scoring.
+
+[Try BindCraft](https://app.tamarind.bio/tools/bindcraft)

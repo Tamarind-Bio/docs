@@ -2,14 +2,13 @@
 title: IgDesign
 description: 'Design CDRs with improved binding affinity'
 ---
-
-IgDesign (https://app.tamarind.bio/tools/igdesign) is an in-vitro validated tool to redesign antibody CDRs in complex with antigens for improved binding affinity. It's developed by Absci and trained on the Structural Antibody Database (SAbDab) retrieved on December 6, 2022. 
-
+IgDesign is an in-vitro validated tool to redesign antibody CDRs in complex with antigens for improved binding affinity. It's developed by Absci and trained on the Structural Antibody Database (SAbDab) retrieved on December 6, 2022. 
+  
 If you need to optimize an antibody/VHH binder bound to an antigen, IgDesign is a great choice! We recommend running IgDesign with 1M sequences (1000 batches) and taking the top 100 designs based on the lowest ce_loss. The authors found somewhat greater success designing HCDR3 only compared to HCDR123. 
 
-The following are binding rates assessed by SPR across antigens for IgDesign on HCDR3 and HCDR123, compared to SAbDab baseline with the native HCDR1 and HCDR2, and sampled HCDR3. 1437 antibodies were screened across 8 targets, and 278 binders were identified. 
+### Experimental Validation
 
-![Binding Rates](/tools/images/igdesign-binding-rates.png)
+The following are binding rates assessed by SPR across antigens for IgDesign on HCDR3 and HCDR123, compared to SAbDab baseline with the native HCDR1 and HCDR2, and sampled HCDR3. 1437 antibodies were screened across 8 targets, and 278 binders were identified. 
 
 | Antigen  | IgDesign (HCDR3)     | IgDesign (HCDR123)   | SAbDab (HCDR3)    |
 |----------|----------------------|----------------------|-------------------|
@@ -21,6 +20,8 @@ The following are binding rates assessed by SPR across antigens for IgDesign on 
 | FXI      | 61.5% (32/52)       | 49.0% (24/49)        | 20.0% (1/5)       |
 | ACVR2B   | 53.3% (16/30)       | 9.4% (3/32)          | 0.0% (0/9)        |
 | TNFRSF9  | 22.4% (15/67)       | 24.3% (9/37)         | 6.3% (2/32)       |
+  
+![Binding Rates](/tools/images/igdesign-binding-rates.png)
 
 ### Inputs
 - **PDB File**: Antibody-antigen complex structure in PDB format
@@ -35,4 +36,6 @@ The following are binding rates assessed by SPR across antigens for IgDesign on 
 - **Redesigned CDRs**: A list of redesigned CDRs
 - **CE Loss Scores**: Cross-entropy loss scores for each design, used to rank the designs (lower is better)
 
-If you don't have a antibody/antigen complex, you can try first predicting a docked structure of your complex using one of our structure prediction tools. If you have epitope information, you can incorporate restraints into your prediciton. 
+If you don't have a antibody/antigen complex, you can try first predicting a docked structure of your complex using one of our structure prediction tools. If you have epitope information, you can incorporate restraints into your prediciton.
+
+[Try IgDesign](https://app.tamarind.bio/tools/igdesign)

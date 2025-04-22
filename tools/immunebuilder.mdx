@@ -3,6 +3,16 @@ title: ImmuneBuilder
 description: 'Fast structure prediction of immune proteins'
 ---
 
-ImmuneBuilder is a collection of tools for predicting structures of Nanobodies, Antibodies, and T-Cell receptors. Note that these not bound to the antigen, i.e. it would predict the structure of the ScFv or VHH without a target present. It is much faster than comparable models like AlphaFold, while maintaining its state of the art accuracy.
+### Fast immune receptor protein structure prediction
 
-For example, on a benchmark of 34 recently solved antibodies, ABodyBuilder2 predicts CDR-H3 loops with an RMSD of 2.81Å, a 0.09Å improvement over AlphaFold-Multimer, while being over a hundred times faster. Similar results are also achieved for nanobodies, (predicts CDR-H3 loops with an average RMSD of 2.89Å, a 0.55Å improvement over AlphaFold2) and TCRs. By predicting an ensemble of structures, ImmuneBuilder also gives an error estimate for every residue in its final prediction.
+ImmuneBuilder is a collection of tools for predicting structures of Nanobodies (NanoBodyBuilder2), Antibodies (ABodyBuilder2), and T-Cell receptors (TCRBuilder2). It cannot incorporate the antigen into the structure prediction, for example it would predict the structure of the ScFv or VHH without a target present. It is much faster than comparable models like AlphaFold, while maintaining state of the art accuracy.
+
+### Methods
+
+Immunebuilder is a modified version of AlphaFold-Multimer specialized for antibodies. It treats residues as rigid bodies rather than flexible, defined by their position and orientation only. 
+
+### Benchmarking
+
+On a benchmark of 34 recently solved antibodies, ABodyBuilder2 predicts CDR-H3 loops with an RMSD of 2.81Å, a 0.09Å improvement over AlphaFold-Multimer, while being over a hundred times faster. Similar results are also achieved for nanobodies, where it predicts CDR-H3 loops with an average RMSD of 2.89Å, a 0.55Å improvement over AlphaFold2, and TCRs. ImmuneBuilder also gives an error estimate for every residue in its final prediction.
+
+[Try ImmuneBuilder](https://app.tamarind.bio/tools/immunebuilder)

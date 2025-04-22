@@ -3,8 +3,31 @@ title: ThermoMPNN
 description: 'Point mutations to improve stability'
 ---
 
-ThermoMPNN returns point mutations scored by their respective impacts on thermostability. The method shows state-of-the-art performance on established benchmarks. It is a variant of ProteinMPNN, a machine learning method that generates novel sequences given a structure for it to fold into. ThermoMPNN, specifically, is trained on a specialized dataset to predict stability changes upon a given mutation, while utilizing ProteinMPNN's learned knowledge about sequence-structure relationships.
+### Find stabilizing mutations
 
-Notably, ThermoMPNN can very quickly (within seconds to minutes) evaluate all possible point mutations of a given input, while showing more accuracy compared to more computationally intensive approaches like MD and MM.
+ThermoMPNN scores point mutations by their ΔΔG°, or change in thermostability from the wildtype. The method shows state-of-the-art performance on established benchmarks, including _Ssym_ and _S669_. 
 
-In addition to the single point-mutation use case, ThermoMPNN-D supports making two mutations at a time, while considering the other residue's context. On Tamarind, both approaches are usable by simply uploading a starting structure.
+### Methods
+
+ThermoMPNN is built on top of ProteinMPNN, a machine learning method that generates novel sequences to fold into a given structure. Specifically, ThermoMPNN is trained on a large dataset (776,000 data points) of ΔΔG° measurements. It uses ProteinMPNN's learned knowledge about sequence-structure relationships by first generating a representation of the protein with ProteinMPNN and using that representation to predict stability.
+
+### Speed
+
+ThermoMPNN is very fast, and can evaluate all possible point mutations of a given input within seconds to minutes, while showing greater accurate than more computationally intensive approaches like MD and MM.
+
+### ThermoMPNN-D
+
+In addition to scoring single mutations, ThermoMPNN-D also supports making two mutations at a time, while considering the other residue's context.
+
+On Tamarind, you can automatically score the top mutations from ThermoMPNN with Alphafold2 to verify their stability. 
+
+**Inputs:**
+- pdbFile - input wildtype structure to be scored
+- chains - chain(s) you want to evaluate mutations on
+- multi - select this if you have multiple chains and want them all included in context
+
+**Outputs:**
+- ddG_pred - Predicted ΔΔG° between wildtype and mutant protein, negative means stabilizing mutation
+- Heatmap of stability of each residue x amino acid pair
+
+[Try ThermoMPNN](https://app.tamarind.bio/tools/thermompnn)

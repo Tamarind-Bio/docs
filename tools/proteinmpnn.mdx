@@ -2,7 +2,28 @@
 title: ProteinMPNN
 description: 'Design sequences given a structure'
 ---
+### Design a sequence to fold into a protein structure
+  
+ProteinMPNN significantly outperforms traditional approaches like Rosetta, achieving 52.4% sequence recovery. It can design sequences for single or multiple chains and has been experimentally validated through X-ray crystallography, cryoEM, and functional studies. The method has successfully designed various protein types including monomers, cyclic homo-oligomers, and target binding proteins, representing a major advancement in computational protein design.
+  
+ProteinMPNN is often used after RFdiffusion to generate sequences for a given designed structure, since RFdiffusion/RFantibody will design structures with poly-Gs as placeholders for designed residues. It can also be used directly from a starting structure to generate stabilizing mutations.
 
-ProteinMPNN is a deep learning-based protein sequence design method that significantly outperforms traditional approaches like Rosetta, achieving 52.4% sequence recovery compared to Rosetta's 32.9%. It can design sequences for single or multiple chains and has been experimentally validated through X-ray crystallography, cryoEM, and functional studies. The method has successfully designed various protein types including monomers, cyclic homo-oligomers, and target binding proteins, representing a major advancement in computational protein design.
+### Inputs
+- PDB File
+- Designed Residues - select residues on each chain to be designed
+- Temperature: adjust the amount of diversity in your sequences. Higher value will generate more mutations. 
 
-ProteinMPNN is often used after RFdiffusion to generate sequences for a given designed structure. It can also be used given a starting structure to generate stabalizing mutations. 
+### Outputs
+- Overall Confidence: Average over all redesigned residues (exp[-mean_over_residues(log_probs)]) - higher means more confident
+
+### Alternative weights
+  
+Others have finetuned ProteinMPNN for different use cases. You can use the following weights by changing the "Model Type" parameter:
+- SolubleMPNN - trained on soluble proteins
+- AbMPNN - trained on antibodies
+- HyperMPNN - trained on hyperthermophilic proteins
+- LigandMPNN - takes ligand atoms into account
+  
+You can also check out ThermoMPNN (uses ProteinMPNN embeddings to identify thermostable point mutations). 
+
+[Try proteinmpnn](https://app.tamarind.bio/tools/proteinmpnn)

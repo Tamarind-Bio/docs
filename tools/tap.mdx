@@ -3,7 +3,23 @@ title: Therapeutic Antibody Profiler (TAP)
 description: 'Assess antibody developability'
 ---
 
-Immunogenicity, instability, self-association, high viscosity, polyspecificity, or poor expression can all preclude an antibody from becoming a therapeutic. Early identification of these negative characteristics is essential. Akin to the Lipinski guidelines, which measure druglikeness in small molecules, our Therapeutic Antibody Profiler(TAP) highlights antibodies that possess characteristics that are rare/unseen in clinical-stage mAb therapeutics. The only required input is the variable domain sequence. We show examples where our approach would have advised against manufacturing antibodies that were found to aggregate or have poor expression.
+### Evaluate antibody developability
 
-TAP makes a model of the structure of a given ScFv or VHH sequence and comparing its charge (and symetry of these charges) to clinical-stage antibodies. On Tamarind, we provide thresholds, which, if passed, show that the properties of the input antibody matches that of therapeutic antibodies.
+TAP calculate key properties from a structure prediction of an antibody sequence using Immunebuilder and compares it to known clinical-stage antibodies, like Lipinski guidelines for antibodies. Each metric has thresholds/acceptable ranges, so you can see if your input antibody matches that of therapeutic antibodies. The properties are found to correlate with poor developability metrics including aggregation, expression, clearance, viscosity, and polyspecificity. TAP has been found to advise against manufacturing antibodies that were later found to aggregate or have poor expression.
 
+Since code isn't available for TAP, the version found on Tamarind is our own reproduction of the paper from its methods. 
+
+Please contact info@tamarind.bio if you'd like to use TAP for nanobodies. 
+
+**Inputs**
+- Heavy Sequence
+- Light Sequence
+
+**Outputs**
+- CDR Length: total length of resides in CDRs (should be in acceptable range)
+- SFvCSP: Product of heavy chain charge x light chain charges to assess asymmetry (too negative is bad)
+- Patches of Surface Hydrophobicity (PSH) (should be in acceptable range)
+- Patches of Positive Charges (PPC) (too much is bad)
+- Patches of Negative Charges (PNC) (too much is bad)
+
+[Try TAP](https://app.tamarind.bio/tools/tap)
