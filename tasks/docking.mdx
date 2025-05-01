@@ -15,4 +15,6 @@ If you need fast docking, we recommend physics based approaches like AutoDock/Sm
 
 To use AutoDock/Smina/Gnina, select a binding box on the protein for where you know your ligand to be by specifying its x/y/z and height/width/depth (can be the whole protein if you have no idea). 
 
+If you don't require fast runtime, we recommend using Chai or Boltz, which are structure prediction tools which have also been found to perform well at docking tasks. For example, Chai-1 scores 77% on the posebusters benchmark set, compared to 60% for Autodock-Vina. If you have a known binding site, you can specify a pocket restraint between your pocket residue and ligand chain. 
+
 Reach out to info@tamarind.bio if you're interested in virtual screening against a ligand library. We offer a multi-stage approach, with more computationally intense screening for a subset of ligands which pass intiial screening. 
